@@ -28,7 +28,7 @@
 	        <td><input type="text" name="mail" /></td></tr>	        
 	  <tr><td><label for="tel">전화번호</label></td>
 	        <td><input type="text" name="tel" /></td></tr>          
-	  <tr><td></td><td><input type="button" name="back" value="취소" onclick="location.href='/'"/><input type="submit" value="신청하기"/></td></tr>
+	  <tr><td></td><td><input type="button" name="back" value="취소" onclick="location.href='/'"/><input type="submit" value="저장"/></td></tr>
 	</table>
 	</form>
 </body>
