@@ -1,0 +1,6 @@
+spring boot STS 설치
+
+https://spring.io/tools3/sts/all
+
+mongodb 설치
+
