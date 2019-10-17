@@ -4,3 +4,7 @@ https://spring.io/tools3/sts/all
 
 mongodb 설치
 
+
++project 불러오는 방법: file > import projects from file system or archive > Directory... >0926
+
+++push 할 때 .metadata,Server 등 삭제해서 push(용량이 크면 push가 안되요)
