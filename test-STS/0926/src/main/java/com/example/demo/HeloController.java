@@ -3,6 +3,7 @@ package com.example.demo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -68,77 +69,38 @@ public class HeloController {
 		            @RequestParam("name") String name,
 		            @RequestParam("mail") String mail,
 		            @RequestParam("tel") String tel,
+		            @RequestParam("check") String check,
 		            ModelAndView mov) 
     {
 	   
-    	 MyDataMongo mydata = new MyDataMongo(name,mail,tel);
+    	 MyDataMongo mydata = new MyDataMongo(name,mail,tel,check);
          repository.save(mydata);
          return new ModelAndView("redirect:/");
 	    
     }
-    
+
     /**
-    *
-    * @fn 		public ModelAndView edit(ModelAndView mav) 
-    * 
-    * @brief 	저장된 정보 중 선택된 한가지의 정보를 호출하는 페이지
-    *
-    * @author 	최지은
-    * @date 	2019-10-09
-    *
-    * @param 	RequestMapping ModelAndView mav
-    *
-    * @remark   edit페이지를 불러옴
-    * 			저장되어 있는 값을 id로 찾아와서 모든 정보를 불러옴
-    */
-    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
-    public ModelAndView edit(ModelAndView mav) 
-    {
-        mav.setViewName("edit");
-        mav.addObject("title","eidt Page");
-        mav.addObject("msg","MyData의 예제입니다.");
-        List<MyDataMongo> list = repository.findAll();
-        mav.addObject("list", list);
-        return mav;
-    }
+	 *
+	 * @fn 		public ModelAndView detail(ModelAndView mav)
+	 * 
+	 * @brief 	상세 조회 페이지
+	 *
+	 * @author 	권연준
+	 * @date 	2019-10-24
+	 *
+	 * @param 	mav ModelAndView
+	 *
+	 * @remark	findBy 를 이용한 조건검색 후 출력	[2019-10-24; 권연준] \n
+	 *
+	 */
     
-    /**
-    *
-    * @fn 		public ModelAndView update(ModelAndView mav) 
-    * 
-    * @brief 	입력되어있는 정보를 수정하는 페이지
-    *
-    * @author 	최지은
-    * @date 	2019-10-09
-    *
-    * @param 	RequestMapping ModelAndView mav
-    *
-    * @remark   update페이지를 불러옴
-    * 			저장되어 있는 값을 id로 찾아와서 모든 정보를 불러온 후 새롭게 입력되는 정보로 수정하여 저장함
-    */
-    @RequestMapping(value = "/update/{id}", method = RequestMethod.GET)
-    public ModelAndView update(ModelAndView mav) 
-    {
-        mav.setViewName("update");
-        mav.addObject("title","update Page");
-        mav.addObject("msg","MyData의 예제입니다.");
-        List<MyDataMongo> getlist = repository.findAll();
-        mav.addObject("datalist", getlist);
-        return mav;
-    }
-    
-    @RequestMapping(value = "/update", method = RequestMethod.POST)
-    public ModelAndView update(
-	    		@RequestParam("name") String name,
-	            @RequestParam("mail") String mail,
-	            @RequestParam("tel") String tel,
-	            ModelAndView mav) 
-    {
- 	   
-   	 MyDataMongo mydata = new MyDataMongo(name,mail,tel);
-        repository.save(mydata);
-        return new ModelAndView("redirect:/edit{id}");
-	    
-   }
+	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+	public ModelAndView detail(@PathVariable("id") String id, ModelAndView mav) {
+		mav.setViewName("detail");
+
+		List<MyDataMongo> list = repository.findById(id);
+		mav.addObject("datalist", list);
+		return mav;
+	}
 
 }

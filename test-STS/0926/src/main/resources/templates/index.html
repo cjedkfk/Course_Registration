@@ -9,9 +9,6 @@
 	body { font-size:13pt; color:gray; }
 	.wrep{
 	}
-	.plus{
-		margin: 2% 28%;
-	}
 	table{width:80%; }
 	th{padding: 10px; width:20%; background: #550000; border: 1px solid #550000; color:White; }
 	td{padding: 10px; text-align: center;}
@@ -19,17 +16,18 @@
 	</style>
 </head>
 <body>
+	<input class="plus" type="button" value="추가" onclick="location.href='insert'"/><br/>
 	<div class="wrep">
 	<table>
-	<tr><th>이름</th><th>이메일</th><th>전화번호</th><th>신청상태</th></tr>
+	<tr><th>이름</th><th>이메일</th><th>전화번호</th><th>신청상태</th><th>상세조회</th></tr>
 	<tr th:each="obj : ${datalist}">
 		<td th:text="${obj.name}"></td>
 	    <td th:text="${obj.mail}"></td>
 	    <td th:text="${obj.tel}"></td>
-	    <td><input type="button" value="보기" th:onclick="location.href='/edit/{id}'"/></td>
+	    <td th:text="${obj.check}"></td>
+	    <td><a th:href="@{'/detail/' + ${obj.id}}">조회</a></td>ㅍ ㅠ
 	</tr>
 	</table>
-	<input class="plus" type="button" value="추가" onclick="location.href='insert'"/>
 	</div>
 </body>
 </html>
