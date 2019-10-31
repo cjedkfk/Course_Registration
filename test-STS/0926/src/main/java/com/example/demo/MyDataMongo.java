@@ -10,13 +10,15 @@ public class MyDataMongo {
 	private String mail;
 	private String name;
 	private String tel;
-	
-	public MyDataMongo(String mail, String name, String tel) 
+	private String check;
+
+	public MyDataMongo(String mail, String name, String tel,String check) 
 	{
         super();
         this.mail = mail;
         this.name = name;
         this.tel = tel;
+        this.check = check;
 	}
    
     public String getId() 
@@ -35,6 +37,11 @@ public class MyDataMongo {
     public String getTel() 
     {
         return tel;
+    }
+    
+    public String getCheck() 
+    {
+        return check;
     }
 
     
