@@ -27,8 +27,14 @@
 	  <tr><td><label for="mail">이메일</label></td>
 	        <td><input type="text" name="mail" /></td></tr>	        
 	  <tr><td><label for="tel">전화번호</label></td>
-	        <td><input type="text" name="tel" /></td></tr>          
-	  <tr><td></td><td><input type="button" name="back" value="취소" onclick="location.href='/'"/><input type="submit" value="저장"/></td></tr>
+	        <td><input type="text" name="tel" /></td></tr>   
+	  <tr><td><label for="check">신청상태</label></td>
+	        <td>  
+	        	<input type="radio" name="check" value="신청">신청<br>
+ 				<input type="radio" name="check" value="미신청" checked>미신청
+ 			</td>
+ 	 </tr>               
+	  <tr><td></td><td><input type="submit" value="저장"/> <input type="button" name="back" value="취소" onclick="location.href='/'"/></td></tr>
 	</table>
 	</form>
 </body>
