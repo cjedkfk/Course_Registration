@@ -76,6 +76,14 @@ public class HeloController {
          return new ModelAndView("redirect:/");
 	    
     }
+    
+	@RequestMapping(value = "/detail/{id}", method = RequestMethod.GET)
+	public ModelAndView detail(@PathVariable("id") String id, ModelAndView mav) {
+		mav.setViewName("detail");
 
+		List<MyDataMongo> list = repository.findById(id);
+		mav.addObject("datalist", list);
+		return mav;
+	}
 
 }
