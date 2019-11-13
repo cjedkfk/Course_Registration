@@ -103,4 +103,111 @@ public class HeloController {
 		return mav;
 	}
 
+	/**
+	 *
+	 * @fn 		public ModelAndView removecheck(@PathVariable("id") String id, ModelAndView mav)
+	 * 
+	 * @brief 	삭제
+	 *
+	 * @author 	김설규
+	 * @date 	2019-11-13
+	 *
+	 * @param 	mav ModelAndView
+	 *
+	 * @remark	id로 list 파악 후 삭제 실행	[2019-11-13; 김설규] \n
+	 *
+	 */
+
+	@RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
+	public ModelAndView removecheck(@PathVariable("id") String id, ModelAndView mav) {
+		mav.setViewName("delete");
+		mav.addObject("title", "Delete Page");
+		mav.addObject("msg", "일정을 취소하시겠어요?");
+
+		List<MyDataMongo> list = repository.findById(id);
+		mav.addObject("datalist", list);
+		return mav;
+	}
+
+	/**
+	 *
+	 * @fn 		public ModelAndView remove(@RequestParam("id") String id, ModelAndView mav)
+	 * 
+	 * @brief 	삭제
+	 *
+	 * @author 	김설규
+	 * @date 	2019-11-13
+	 *
+	 * @param 	mav ModelAndView
+	 *
+	 * @remark	id로 list 파악 후 삭제 실행 끝마침은 새로고침	[2019-11-13; 김설규] \n
+	 *
+	 */
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
+	public ModelAndView remove(@RequestParam("id") String id, ModelAndView mav) {
+		repository.deleteById(id);
+		return new ModelAndView("redirect:/");
+	}
+
+	/**
+	 *
+	 * @fn 		public ModelAndView edit(@PathVariable("id") String id, ModelAndView mav)
+	 * 
+	 * @brief 	수정
+	 *
+	 * @author 	김설규
+	 * @date 	2019-11-13
+	 *
+	 * @param 	mav ModelAndView
+	 *
+	 * @remark	id로 list 파악 후 기존 기록 삭제	[2019-11-13; 김설규] \n
+	 *
+	 */
+	
+	@RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+	public ModelAndView edit(@PathVariable("id") String id, ModelAndView mav) {
+		
+		mav.setViewName("edit");
+		mav.addObject("title", "Edit Page");
+		mav.addObject("msg", "일정을 바꾸시겠어요?");
+		
+		List<MyDataMongo> list = repository.findById(id);
+		
+		mav.addObject("datalist", list);
+		return mav;
+	}
+
+
+	/**
+	 *
+	 * @fn 		public ModelAndView editpost
+	 * 
+	 * @brief 	수정
+	 *
+	 * @author 	김설규
+	 * @date 	2019-11-13
+	 *
+	 * @param 	mav ModelAndView
+	 *
+	 * @remark	id로 list 파악 후 기존 기록 삭제 후 재입력	[2019-11-13; 김설규] \n
+	 *
+	 */
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public ModelAndView editpost(
+			@RequestParam("id") String id, 
+			@RequestParam("mail") String mail,
+			@RequestParam("name") String name, 
+			@RequestParam("tel") String tel,
+			@RequestParam("check") String check, ModelAndView mov) 
+	{
+		MyDataMongo mydata = new MyDataMongo(mail, name, tel, check);
+		repository.save(mydata);
+		repository.deleteById(id);
+		
+		return new ModelAndView("redirect:/");
+	}
+
 }
+

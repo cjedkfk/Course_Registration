@@ -8,4 +8,5 @@ public interface MyDataMongoRepository extends MongoRepository<MyDataMongo, Long
 {
 	public List<MyDataMongo> findById(String i);
 	public List<MyDataMongo> findByName(String s);
+	public void deleteById(String id);
 }
